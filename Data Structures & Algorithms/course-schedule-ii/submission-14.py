@@ -1,0 +1,25 @@
+class Solution:
+    def findOrder(self, numCourses: int, prerequisites: List[List[int]]) -> List[int]:
+        exitTime = []
+        preReq = defaultdict(list)
+        can = set()
+        taken = set()
+        for course, pre in prerequisites:
+            preReq[course].append(pre)
+        def canBeTaken(course):
+            if course in can:
+                return True
+            if course in taken:  # Loop detected
+                return False
+            taken.add(course)    
+            for each in preReq[course]:
+                if not canBeTaken(each):
+                    return False
+            can.add(course)
+            exitTime.append(course)
+            return True
+        
+        for course in range(numCourses):
+            if not canBeTaken(course):
+                return []
+        return exitTime
