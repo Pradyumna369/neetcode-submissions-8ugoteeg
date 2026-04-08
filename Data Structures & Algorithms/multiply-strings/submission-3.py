@@ -1,0 +1,11 @@
+class Solution:
+    def multiply(self, num1: str, num2: str) -> str:
+        num3 = 0
+        for i in range(len(num1) - 1, -1, -1):
+            num3 += pow(10, len(num1) - i - 1) * (ord(num1[i]) - ord('0'))
+        num4 = 0
+        for i in range(len(num2) - 1, -1, -1):
+            num4 += pow(10, len(num2) - i - 1) * (ord(num2[i]) - ord('0'))
+
+        return str(num3 * num4)
+         
